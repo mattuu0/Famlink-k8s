@@ -1,2 +1,2 @@
-# k8s-sample-app-kustomize
-k8s-sample-app の kustomize リポジトリ
+# Famlink k8s 用のリポジトリ
+

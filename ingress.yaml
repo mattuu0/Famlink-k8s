@@ -1,28 +1,22 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# ingressroute.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name: sample-app-ingress
-  labels:
-    app.kubernetes.io/name: sample-app-ingress
-  annotations:  
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: sample-app-ingressroute
 spec:
-  ingressClassName: nginx
-  rules:
-  - host: sample-k8s.mattuu.com
-    http:
-      paths:
-        - path: "/ui(/|$)(.*)"
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: sample-frontend-service
-              port: 
-                number: 80
-        - path: "/app(/|$)(.*)"
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: sample-backend-service
-              port: 
-                number: 80
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`famlink.aoioq.com`) && PathPrefix(`/ui`)
+      kind: Rule
+      services:
+        - name: sample-frontend-service
+          port: 80
+    - match: Host(`famlink-api.aoioq.com`) && PathPrefix(`/`)
+      kind: Rule
+      middlewares:
+        - name: app-stripprefix
+      services:
+        - name: sample-backend-service
+          port: 3001

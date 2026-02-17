@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-frontend
+  name: famlink-frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sample-frontend
+      app: famlink-frontend
   template:
     metadata:
       labels:
-        app: sample-frontend
+        app: famlink-frontend
     spec:
       containers:
-      - name: sample-frontend
-        image: ghcr.io/mattuu0-test-env/k8s-sample-app/frontend:latest
+      - name: famlink-frontend
+        image: ghcr.io/mattuu0/famlink/frontend:latest
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 3000
+        - containerPort: 3001

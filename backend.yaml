@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-backend
+  name: famlink-backend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sample-backend
+      app: famlink-backend
   template:
     metadata:
       labels:
-        app: sample-backend
+        app: famlink-backend
     spec:
       containers:
-      - name: sample-backend
-        image: ghcr.io/mattuu0-test-env/k8s-sample-app/app:latest
+      - name: famlink-backend
+        image: ghcr.io/mattuu0/famlink/backend:latest
         resources:
           limits:
             memory: "128Mi"
